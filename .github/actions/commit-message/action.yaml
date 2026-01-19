@@ -1,0 +1,34 @@
+name: Commit Message Validator
+description: Enforces commit message format with ticket ID
+
+inputs:
+  pattern:
+    description: Regex pattern for commit message validation
+    required: false
+    default: '^[A-Z]{2,}-[0-9]+ (feat|fix|docs|style|refactor|test|chore)(\([a-zA-Z0-9_-]+\))?: .+'
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        REGEX="${{ inputs.pattern }}"
+
+        git fetch --all --quiet
+
+        BASE=${GITHUB_BASE_REF:-HEAD~1}
+
+        COMMITS=$(git log --format=%s $BASE..HEAD)
+
+        echo "$COMMITS" | while read -r msg; do
+          if ! [[ "$msg" =~ $REGEX ]]; then
+            echo "❌ Invalid commit message:"
+            echo "   $msg"
+            echo ""
+            echo "Expected format:"
+            echo "   ABC-123 feat(scope): short description"
+            exit 1
+          fi
+        done
+
+        echo "✅ Commit messages validated"

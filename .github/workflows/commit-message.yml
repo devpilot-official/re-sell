@@ -1,34 +1,16 @@
-name: Validate Commit Messages
+name: Commit Message Lint
 
 on:
-  push:
   pull_request:
+  push:
 
 jobs:
-  commit-lint:
+  lint-commits:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Validate commit messages
-        run: |
-          REGEX="^(feat|fix|docs|style|refactor|test|chore)(\\([a-zA-Z0-9_-]+\\))?: .+"
-
-          COMMITS=$(git log --format=%s origin/${{ github.base_ref }}..HEAD)
-
-          echo "$COMMITS" | while read -r message; do
-            if ! [[ "$message" =~ $REGEX ]]; then
-              echo "❌ Invalid commit message:"
-              echo "   $message"
-              echo ""
-              echo "Expected format:"
-              echo "   feat(scope): short description"
-              exit 1
-            fi
-          done
-
-          echo "✅ All commit messages are valid"
+      - uses: ./.github/actions/commit-message
