@@ -1,0 +1,12 @@
+#!/bin/sh
+
+REGEX="^(feat|fix|docs|style|refactor|test|chore)(\\([a-zA-Z0-9_-]+\\))?: .+"
+MESSAGE=$(cat "$1")
+
+if ! echo "$MESSAGE" | grep -Eq "$REGEX"; then
+  echo "❌ Invalid commit message."
+  echo ""
+  echo "Expected format:"
+  echo "  feat(scope): short description"
+  exit 1
+fi
