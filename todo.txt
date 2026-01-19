@@ -1,3 +1,6 @@
 1.  Refactor/Restructure code (frontend and backend)
-2.  Setup Unit test
-3. Setup pre-commit (to make sure test pass before pushing commit, test coverage,linting and typecheck)
+2.  Setup Unit test and test coverage for repo, branch and statements
+3.  Setup Feature flag
+4.  Setup automated test
+5.  Setup pre-commit (to make sure test pass before pushing commit, test coverage,linting and typecheck)
+6.  Setup performance test
