@@ -5,7 +5,7 @@ inputs:
   pattern:
     description: Regex pattern for commit message validation
     required: false
-    default: '^[A-Z]{2,}-[0-9]+ (feat|fix|docs|style|refactor|test|chore)(\([a-zA-Z0-9_-]+\))?: .+'
+    default: '^(feature|fix|docs|style|refactor|test|chore): (Add|Remove|Update|Refactor|Fix|Improve) .+'
 
 runs:
   using: composite
@@ -26,7 +26,9 @@ runs:
             echo "   $msg"
             echo ""
             echo "Expected format:"
-            echo "   ABC-123 feat(scope): short description"
+            echo "  feature|fix|docs|style|refactor|test|chore): (Add|Remove|Update|Refactor|Fix|Improve) short description"
+            echo "Got:"
+            echo " $msg"
             exit 1
           fi
         done

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "node scripts/install-hooks.js",
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
