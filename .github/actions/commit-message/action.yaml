@@ -4,8 +4,8 @@ description: Enforces commit message format with ticket ID
 inputs:
   pattern:
     description: Regex pattern for commit message validation
-    required: false
-    default: '^(feature|fix|docs|style|refactor|test|chore): (Add|Remove|Update|Refactor|Fix|Improve|Change) .+'
+    required: true
+    default: '^(feature|fix|docs|style|refactor|test|chore): (Add|Remove|Update|Refactor|Fix|Improve|Change|Make) .+'
 
 runs:
   using: composite
@@ -26,7 +26,7 @@ runs:
             echo "   $msg"
             echo ""
             echo "Expected format:"
-            echo "  feature|fix|docs|style|refactor|test|chore: Add|Remove|Update|Refactor|Fix|Improve|Change short description"
+            echo "  feature|fix|docs|style|refactor|test|chore: Add|Remove|Update|Refactor|Fix|Improve|Change|Make short description"
             echo "Got:"
             echo " $msg"
             exit 1
