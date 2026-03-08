@@ -6,6 +6,7 @@ on:
 
 jobs:
   lint-commits:
+    name: "Lint Commit"
     runs-on: ubuntu-latest
 
     steps:
